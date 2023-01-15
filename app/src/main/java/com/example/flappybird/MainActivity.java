@@ -137,8 +137,12 @@ public class MainActivity extends AppCompatActivity implements JGameLib.GameEven
     public void onGameCollision(JGameLib.Card card1, JGameLib.Card card2) {
         if(card1 == cardBird) {
             gameLib.stopAllWork();
+            gameLib.popupDialog(null, "Oops! Try again", "Close");
         }
     }
+
+    @Override
+    public void onGameTimer(int what) {}
 
     // Game Event end ====================================
 
