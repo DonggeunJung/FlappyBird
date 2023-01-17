@@ -1,11 +1,9 @@
 package com.example.flappybird;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements JGameLib.GameEvent {
