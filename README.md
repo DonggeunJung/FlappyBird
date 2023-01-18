@@ -2,7 +2,7 @@
  [Android & Java] Sample FlappyBird game using JGameLib for education
 
 
-[Image1 : FlappyBird game first stage]
+[Image1 : FlappyBird game main screen]
 
 <div>
 <img src="https://github.com/DonggeunJung/FlappyBird/blob/main/FlappyBird_Capture01.png?raw=true width="360px" height="600px"></img>
