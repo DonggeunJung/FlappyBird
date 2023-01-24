@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements JGameLib.GameEven
     void initGame() {
         gameLib.listener(this);
         gameLib.setScreenGrid(100, 140);
-        gameBackground = gameLib.addCard(R.drawable.scroll_back_woods);
+        gameBackground = gameLib.addCard(R.drawable.flappybird_back);
         gameBackground.sourceRect(0, 0, 30, 100);
         cardBird = gameLib.addCard(R.drawable.sprite_bird01, 10, 30, 10, 12);
         cardBird.addImage(R.drawable.sprite_bird02);
