@@ -6,34 +6,34 @@ import android.os.Bundle;
 import android.view.View;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements JGameLib.GameEvent {
-    JGameLib gameLib = null;
-    JGameLib.Card gameBackground;
-    JGameLib.Card cardBird;
-    ArrayList<JGameLib.Card> hurdles = new ArrayList();
+public class MainActivity extends AppCompatActivity implements Mosaic.GameEvent {
+    Mosaic mosaic = null;
+    Mosaic.Card gameBackground;
+    Mosaic.Card cardBird;
+    ArrayList<Mosaic.Card> hurdles = new ArrayList();
     double hurdleDistance = 270;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        gameLib = findViewById(R.id.gameLib);
+        mosaic = findViewById(R.id.mosaic);
         initGame();
     }
 
     @Override
     protected void onDestroy() {
-        if(gameLib != null)
-            gameLib.clearMemory();
+        if(mosaic != null)
+            mosaic.clearMemory();
         super.onDestroy();
     }
 
     void initGame() {
-        gameLib.listener(this);
-        gameLib.setScreenGrid(100, 140);
-        gameBackground = gameLib.addCard(R.drawable.flappybird_back);
+        mosaic.listener(this);
+        mosaic.setScreenGrid(100, 140);
+        gameBackground = mosaic.addCard(R.drawable.flappybird_back);
         gameBackground.sourceRect(0, 0, 30, 100);
-        cardBird = gameLib.addCard(R.drawable.sprite_bird01, 10, 30, 10, 12);
+        cardBird = mosaic.addCard(R.drawable.sprite_bird01, 10, 30, 10, 12);
         cardBird.addImage(R.drawable.sprite_bird02);
         cardBird.checkCollision();
         addHurdle(100, 0, 15, 30);
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements JGameLib.GameEven
     }
 
     void addHurdle(double l, double t, double w, double h) {
-        JGameLib.Card hurdle = gameLib.addCardColor(Color.rgb(255,153,51), l, t, w, h);
+        Mosaic.Card hurdle = mosaic.addCardColor(Color.rgb(255,153,51), l, t, w, h);
         hurdle.edge(Color.rgb(255,204,153), 3);
         hurdle.checkCollision();
         hurdles.add(hurdle);
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements JGameLib.GameEven
     }
 
     void hurdleScroll() {
-        for(JGameLib.Card hurdle : hurdles) {
+        for(Mosaic.Card hurdle : hurdles) {
             hurdle.movingGap(-hurdleDistance, 0, 6);
         }
     }
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements JGameLib.GameEven
     // Game Event start ====================================
 
     @Override
-    public void onGameWorkEnded(JGameLib.Card card, JGameLib.WorkType workType) {
+    public void onGameWorkEnded(Mosaic.Card card, Mosaic.WorkType workType) {
         switch(workType) {
             case SOURCE_RECT: {
                 if(card == gameBackground) {
@@ -125,16 +125,16 @@ public class MainActivity extends AppCompatActivity implements JGameLib.GameEven
     }
 
     @Override
-    public void onGameTouchEvent(JGameLib.Card card, int action, float x, float y) {}
+    public void onGameTouchEvent(Mosaic.Card card, int action, float x, float y) {}
 
     @Override
     public void onGameSensor(int sensorType, float x, float y, float z) {}
 
     @Override
-    public void onGameCollision(JGameLib.Card card1, JGameLib.Card card2) {
+    public void onGameCollision(Mosaic.Card card1, Mosaic.Card card2) {
         if(card1 == cardBird) {
-            gameLib.stopAllWork();
-            gameLib.popupDialog(null, "Oops! Try again", "Close");
+            mosaic.stopAllWork();
+            mosaic.popupDialog(null, "Oops! Try again", "Close");
         }
     }
 
